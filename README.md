@@ -5,9 +5,12 @@ details of any HTTP requests sent to it, including method, path, query params,
 headers and request body.
 
 The output uses log level INFO, so you need to set an environment variable
-accordingly:
+accordingly when running the program:
 
     RUST_LOG=info recho
+
+If the program is able to log output successfully, it will respond with a HEAD
+200.
 
 ## Example
 
