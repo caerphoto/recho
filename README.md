@@ -9,6 +9,31 @@ accordingly:
 
     RUST_LOG=info recho
 
+## Example
+
+    curl http://localhost:4000/testing?foo=bar&baz=qux --data "hello this is curl!" --request POST
+
+Log output:
+
+```
+[2026-03-10T11:13:20Z INFO  recho] Request path: POST /testing
+    Query:
+    {
+        "baz": "qux",
+        "foo": "bar",
+    }
+    Headers:
+    {
+        "host": "localhost:4000",
+        "user-agent": "curl/8.7.1",
+        "accept": "*/*",
+        "content-length": "19",
+        "content-type": "application/x-www-form-urlencoded",
+    }
+    Body:
+    hello this is curl!
+```
+
 ## TODO
 
 Allow listen port to be configurable.

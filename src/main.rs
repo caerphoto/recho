@@ -15,7 +15,7 @@ async fn echo(uri: OriginalUri, method: Method, Query(params): Query<HashMap<Str
     } else {
         log::info!("Request path: {}\nQuery:\n{}\nHeaders:\n{}\nBody:\n{}",
             format!("{} {}", method, uri.path()).magenta(),
-            format!("{:#?}", params),
+            format!("{:#?}", params).yellow(),
             format!("{:#?}", headers).cyan(),
             format!("{}", body).green());
     }
