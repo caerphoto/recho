@@ -1,18 +1,21 @@
+use std::collections::HashMap;
 use axum::{
     Router,
-    extract::OriginalUri,
-    http::header::HeaderMap,
+    extract::{Query, OriginalUri},
+    http::{Method, header::HeaderMap},
 };
 use colored::Colorize;
 
-async fn echo(uri: OriginalUri, headers: HeaderMap, body: String) {
+async fn echo(uri: OriginalUri, method: Method, Query(params): Query<HashMap<String, String>>, headers: HeaderMap, body: String) {
     if body.is_empty() {
-        log::info!("Request path: {}\nHeaders:\n{}\n(no request body)",
-            format!("{}", uri.path()).magenta(),
+        log::info!("Request to: {}\nQuery:\n{}\nHeaders:\n{}\n(no request body)",
+            format!("{} {}", method, uri.path()).magenta(),
+            format!("{:#?}", params).yellow(),
             format!("{:#?}", headers).cyan())
     } else {
-        log::info!("Request path: {}\nHeaders:\n{}\nBody:\n{}",
-            format!("{}", uri.path()).magenta(),
+        log::info!("Request path: {}\nQuery:\n{}\nHeaders:\n{}\nBody:\n{}",
+            format!("{} {}", method, uri.path()).magenta(),
+            format!("{:#?}", params),
             format!("{:#?}", headers).cyan(),
             format!("{}", body).green());
     }
